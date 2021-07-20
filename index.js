@@ -3,6 +3,7 @@ import cors from "cors"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 import notes from "./routes/notes.js"
+import users from "./routes/users.js"
 
 dotenv.config()
 const app = express()
@@ -19,8 +20,8 @@ mongoose.connect( CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: t
 
 mongoose.set('useFindAndModify', false)
 
-// app.use("/", (req, res) => res.status(200).json({ message: "Please specify route" }))
 app.use("/notes", notes)
+app.use("/users", users)
 app.use("*", (req, res) => res.status(404).json({ error: "Not found" }))
 
 export default app
