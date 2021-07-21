@@ -2,8 +2,8 @@ import express from "express"
 import cors from "cors"
 import mongoose from "mongoose"
 import dotenv from "dotenv"
-import notes from "./routes/notes.js"
-import users from "./routes/users.js"
+import notes from "./routes/notes_routes.js"
+import users from "./routes/users_routes.js"
 
 dotenv.config()
 const app = express()
