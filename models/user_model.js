@@ -1,14 +1,12 @@
 import mongoose from "mongoose"
+import { noteSchema } from "./note_model.js"
 
 const userSchema = mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    notes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Note"
-    }],
+    notes: [noteSchema],
     theme: { type: String, default: "light" },
     fnd: { type: Boolean, default: false }
 })
