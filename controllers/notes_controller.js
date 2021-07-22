@@ -27,7 +27,7 @@ export const createNote = async (req, res) => {
 export const updateNote = async (req, res) => {
     const { id: _id } = req.params
 
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Note not found")
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Note not found.")
 
     const updatedNote = await Note.findByIdAndUpdate(_id, req.body, { new: true })
     const user = await User.findById(req.body.user)
@@ -45,12 +45,12 @@ export const updateNote = async (req, res) => {
 export const deleteNote = async (req, res) => {
     const { id: _id } = req.params
 
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Note not found")
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("Note not found.")
 
     const foundNote = await Note.findById(_id)
     const user = await User.findById(foundNote.user)
     user.notes = [...user.notes.filter((note) => note._id.toString() !== _id.toString())]
     await user.save()
     await Note.findByIdAndDelete(_id)
-    res.json({ message: 'Note deleted'})
+    res.json({ message: 'Note deleted.'})
 }

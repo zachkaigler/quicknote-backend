@@ -49,3 +49,12 @@ export const getUsers = async (req, res) => {
         res.status(404).json({ error: error.message })
     }
 }
+
+export const authenticate = async (req, res) => {
+    const user = await User.findById(req.userId)
+    try {
+        res.status(200).json({ result: user })
+    } catch (error) {
+        res.status(404).json({ error: error.message })
+    }
+}
