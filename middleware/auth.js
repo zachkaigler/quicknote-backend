@@ -7,6 +7,9 @@ const SECRET = process.env.SECRET
 
 const auth = async (req, res, next) => {
     try {
+        const auth = req.headers.authorization
+        if (!auth) return res.status(401).json({ error: "Unauthorized action. Please log in." })
+
         const token = req.headers.authorization.split(" ")[1]
         const decodedData = jwt.verify(token, SECRET)
         req.userId = decodedData?.id
