@@ -7,8 +7,7 @@ const userSchema = mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     notes: [noteSchema],
-    theme: { type: String, default: "light" },
-    fnd: { type: Boolean, default: false }
+    theme: { type: String, default: "dark" }
 })
 
 const User = mongoose.model("User", userSchema)

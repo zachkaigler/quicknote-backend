@@ -3,6 +3,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv"
 import User from "../models/user_model.js"
+import Note from "../models/note_model.js"
 
 dotenv.config()
 
@@ -38,6 +39,16 @@ export const signUp = async (req, res) => {
         firstName: firstName,
         lastName: lastName
      })
+     const firstNote = await Note.create({
+        title: "My First Note",
+        content: "Welcome to QuickNote! You can add, edit, or delete anything you write here. 😎",
+        date: new Date().toLocaleString(),
+        color: "white",
+        pinned: true,
+        user: user._id
+     })
+     user.notes.unshift(firstNote)
+     await user.save()
      const token = jwt.sign({ email: user.email, id: user._id }, SECRET, { expiresIn: "24hr" })
      res.status(200).json({ user, token })
 }

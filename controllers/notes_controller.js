@@ -16,7 +16,7 @@ export const createNote = async (req, res) => {
     const user = await User.findById(req.userId)
     try {
         await newNote.save()
-        user.notes.push(newNote)
+        user.notes.unshift(newNote)
         await user.save()
         res.status(201).json(newNote)
     } catch (error) {
