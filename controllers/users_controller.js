@@ -19,7 +19,7 @@ export const signIn = async (req, res) => {
         const isPassCorrect = await bcrypt.compare(password, user.password)
         if (!isPassCorrect) return res.status(400).json({ error: "Incorrect password." })
 
-        const token = jwt.sign({ email: user.email, id: user._id }, SECRET, { expiresIn: "24hr" })
+        const token = jwt.sign({ email: user.email, id: user._id }, SECRET)
         res.status(200).json({ result: user, token })
     } catch (error) {
         res.status(500).json({ error: "Something went wrong." })
@@ -49,7 +49,7 @@ export const signUp = async (req, res) => {
      })
      user.notes.unshift(firstNote)
      await user.save()
-     const token = jwt.sign({ email: user.email, id: user._id }, SECRET, { expiresIn: "24hr" })
+     const token = jwt.sign({ email: user.email, id: user._id }, SECRET)
      res.status(200).json({ user, token })
 }
 
